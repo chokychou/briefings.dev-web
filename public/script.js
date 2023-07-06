@@ -46,6 +46,9 @@ function format_column(key, values) {
   // Add the innermost div to the inner div
   containerDiv.appendChild(headerDiv);
   containerDiv.appendChild(bodyDiv);
+
+
+  
   return containerDiv;
 }
 

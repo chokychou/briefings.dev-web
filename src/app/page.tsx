@@ -1,11 +1,10 @@
-import Head from 'next/head'
 import Script from 'next/script'
 import '../pushpush.js'
 
 export default function Home() {
   return (
     <div>
-      <Head>
+      <div className="container">
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-T8G2TNGRSK"></Script>
         <Script id="google-analytics">
           {`
@@ -16,8 +15,7 @@ export default function Home() {
             gtag('config', 'G-T8G2TNGRSK');
           `}
         </Script>
-
-      </Head>
+      </div>
 
       <header className="bg-white shadow h-16">
         <div className="container mx-auto flex justify-between items-center px-6 py-4">
@@ -28,7 +26,7 @@ export default function Home() {
             <a href="https://github.com/chokychou" className="py-2 px-4">Contact</a>
           </nav>
         </div>
-        <main id="main" className="container mx-auto mt-4">
+        <main id="main" className="bg-gray-100 container mx-auto mt-4 py-8">
           <Script
             src="script.js"
             strategy="lazyOnload"
