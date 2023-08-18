@@ -54,5 +54,4 @@ async function requestPermission() {
     });
 }
 
-
 requestPermission();

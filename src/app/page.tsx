@@ -17,7 +17,7 @@ export default function Home() {
         </Script>
       </div>
 
-      <header className="bg-white shadow h-16">
+      <header className="bg-white shadow">
         <div className="container mx-auto flex justify-between items-center px-6 py-4">
           <h1 className="text-gray-800 font-bold text-xl"><a href="https://briefings.dev">Briefings.dev</a></h1>
           <nav className="text-gray-600 text-sm">
@@ -26,7 +26,7 @@ export default function Home() {
             <a href="https://github.com/chokychou" className="py-2 px-4">Contact</a>
           </nav>
         </div>
-        <main id="main" className="bg-gray-100 container mx-auto mt-4 py-8">
+        <main id="main" className="bg-gray-100 mx-auto mt-4 py-8 h-screen" >
           <Script
             src="script.js"
             strategy="lazyOnload"

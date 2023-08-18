@@ -1,5 +1,5 @@
 // const serving_path = 'localhost:$port/api';
-const serving_path = "serving.json";
+const serving_path = "/tmp/serving.json";
 
 // value enum in each row of serving.json
 const serving_columns = {
