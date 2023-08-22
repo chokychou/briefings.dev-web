@@ -13,8 +13,11 @@ function display_serving() {
     fetch(serving_path)
       .then(response => response.json())
       .then(data => {
-        // for each value in data dictionary, print it to html
+        if (!data) {
+          return;
+        }
 
+        // for each value in data dictionary, print it to html
         for (var key in data) {
             // add a div to the html
             document.getElementById("main").appendChild(format_column(key, data[key]));

@@ -7,6 +7,7 @@ import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 import { getMessaging, getToken } from "firebase/messaging";
+import { getDatabase, ref, set } from "firebase/database";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -18,6 +19,7 @@ const firebaseConfig = {
     messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
     appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
     measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
+    databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
 };
 
 // Initialize Firebase
@@ -33,12 +35,12 @@ async function requestPermission() {
             const messaging = getMessaging();
             
             getToken(messaging, { 
-                vapidKey: 
-                process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY
-             }).then((currentToken) => {
+                vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY
+            }).then((currentToken) => {
                 if (currentToken) {
-                    // Send the token to your server and update the UI if necessary
-                    console.log("currentToken:", currentToken);
+                    // Log token and send to server.
+                    // TODO: Set IP and ttl.
+                    pushTokenToServer(currentToken, 3600);
                 } else {
                     // Show permission request UI
                     console.log('No registration token available. Request permission to generate one.');
@@ -51,6 +53,16 @@ async function requestPermission() {
         } else {
             console.log('Unable to get permission.');
         }
+    });
+}
+
+function pushTokenToServer(token, ttl) {
+    console.log("currentToken:", token);
+    const db = getDatabase();
+    set(ref(db, 'tokens/' + token), {
+        token: token,
+        ttl : ttl,
+        date: new Date()
     });
 }
 
