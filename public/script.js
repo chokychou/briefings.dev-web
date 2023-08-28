@@ -1,5 +1,5 @@
 // const serving_path = 'localhost:$port/api';
-const serving_path = "/tmp/serving.json";
+const serving_path = "http://127.0.0.1:5000/";
 
 // value enum in each row of serving.json
 const serving_columns = {
@@ -14,6 +14,7 @@ function display_serving() {
       .then(response => response.json())
       .then(data => {
         if (!data) {
+          console.log("No data");
           return;
         }
 

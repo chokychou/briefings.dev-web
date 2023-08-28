@@ -24,12 +24,12 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// TODO Initialize Firebase Analytics.
+// const analytics = getAnalytics(app);
 
 async function requestPermission() {
     Notification.requestPermission().then((permission) => {
         if (permission === 'granted') {
-            console.log('Notification permission granted.');
             // Get registration token. Initially this makes a network call, once retrieved
             // subsequent calls to getToken will return from cache.
             const messaging = getMessaging();
@@ -57,7 +57,6 @@ async function requestPermission() {
 }
 
 function pushTokenToServer(token, ttl) {
-    console.log("currentToken:", token);
     const db = getDatabase();
     set(ref(db, 'tokens/' + token), {
         token: token,

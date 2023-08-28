@@ -5,14 +5,14 @@ export default function Home() {
   return (
     <div>
       <div className="container">
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-T8G2TNGRSK"></Script>
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-S2DHEHCCVL"></Script>
         <Script id="google-analytics">
           {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-          
-            gtag('config', 'G-T8G2TNGRSK');
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-S2DHEHCCVL');
           `}
         </Script>
       </div>
@@ -26,7 +26,7 @@ export default function Home() {
             <a href="https://github.com/chokychou" className="py-2 px-4">Contact</a>
           </nav>
         </div>
-        <main id="main" className="bg-gray-100 mx-auto mt-4 py-8 h-screen" >
+        <main id="main" className="bg-gray-100 mx-auto mt-4 py-8" >
           <Script
             src="script.js"
             strategy="lazyOnload"
