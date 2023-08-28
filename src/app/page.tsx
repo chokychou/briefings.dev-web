@@ -22,8 +22,8 @@ export default function Home() {
           <h1 className="text-gray-800 font-bold text-xl"><a href="https://briefings.dev">Briefings.dev</a></h1>
           <nav className="text-gray-600 text-sm">
             <a href="https://briefings.dev" className="py-2 px-4 hover:opacity-0 transition-opacity duration-500 sm:inline-block hidden">Home</a>
-            <a href="https://github.com/chokychou/news-app-project-web" className="py-2 px-4 hover:opacity-0 transition-opacity duration-500 sm:inline-block hidden" >About</a>
-            <a href="https://github.com/chokychou" className="py-2 px-4">Contact</a>
+            <a href="https://briefings.dev" className="py-2 px-4 hover:opacity-0 transition-opacity duration-500 sm:inline-block hidden" >About</a>
+            <a href="https://briefings.dev" className="py-2 px-4">Contact</a>
           </nav>
         </div>
         <main id="main" className="bg-gray-100 mx-auto mt-4 py-8" >
