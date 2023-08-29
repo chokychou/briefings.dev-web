@@ -14,6 +14,6 @@ npm run dev
 
 Or for prod:
 ```bash
-npm build
+npm run build
 npm start
 ```
