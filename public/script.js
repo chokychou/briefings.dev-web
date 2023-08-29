@@ -8,9 +8,19 @@ const serving_columns = {
   summary : 3,
 };
 
+// Timeout function
+//     https://stackoverflow.com/a/57888548/13091479
+const fetchTimeout = (url, ms, { signal, ...options } = {}) => {
+  const controller = new AbortController();
+  const promise = fetch(url, { signal: controller.signal, ...options });
+  if (signal) signal.addEventListener("abort", () => controller.abort());
+  const timeout = setTimeout(() => controller.abort(), ms);
+  return promise.finally(() => clearTimeout(timeout));
+};
+
 // This function display data read from serving.json to html
 function display_serving() {
-    fetch(serving_path)
+    fetchTimeout(serving_path, 1000)
       .then(response => response.json())
       .then(data => {
         if (!data) {
