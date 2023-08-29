@@ -11,3 +11,9 @@ First, run the development server:
 ```bash
 npm run dev
 ```
+
+Or for prod:
+```bash
+npm build
+npm start
+```
