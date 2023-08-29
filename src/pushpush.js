@@ -59,7 +59,6 @@ async function requestPermission() {
 function pushTokenToServer(token, ttl) {
     const db = getDatabase();
     set(ref(db, 'tokens/' + token), {
-        token: token,
         ttl : ttl,
         date: new Date()
     });
