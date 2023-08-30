@@ -1,4 +1,4 @@
-// const serving_path = 'localhost:$port/api';
+// This file is used in page.tsx. And then deprecated. Use it for testing only.
 const serving_path = "http://127.0.0.1:5000/";
 
 // value enum in each row of serving.json

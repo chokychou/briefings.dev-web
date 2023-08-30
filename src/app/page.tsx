@@ -33,8 +33,7 @@ export default function Home() {
           > 
           {
             `
-            // const serving_path = 'localhost:$port/api';
-            const serving_path = "http://127.0.0.1:5000/";
+            const serving_path = "/backend";
 
             // value enum in each row of serving.json
             const serving_columns = {
@@ -48,8 +47,6 @@ export default function Home() {
             const fetchTimeout = (url, ms, {signal, ...options} = {}) => {
               options = options || {
                 method: "OPTIONS",
-                mode: "origin",
-                referrerpolicy: 'no-referrer',
                 headers: {
                   "Content-Type": "application/json",
                 },
