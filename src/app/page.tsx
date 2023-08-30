@@ -28,6 +28,7 @@ export default function Home() {
         </div>
         <main id="main" className="bg-gray-100 mx-auto mt-4 py-8" >
           <Script
+            id="query_server"
             strategy="lazyOnload"
           > 
           {
