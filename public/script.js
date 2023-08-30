@@ -10,7 +10,7 @@ const serving_columns = {
 
 // Timeout function
 //     https://stackoverflow.com/a/57888548/13091479
-const fetchTimeout = (url, ms, { signal, ...options } = {}) => {
+const fetchTimeout = (url, ms, {signal, ...options} = {}) => {
   const controller = new AbortController();
   const promise = fetch(url, { signal: controller.signal, ...options });
   if (signal) signal.addEventListener("abort", () => controller.abort());
