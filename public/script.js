@@ -11,6 +11,16 @@ const serving_columns = {
 // Timeout function
 //     https://stackoverflow.com/a/57888548/13091479
 const fetchTimeout = (url, ms, {signal, ...options} = {}) => {
+  options = options || {
+    method: "OPTIONS",
+    mode: "origin",
+    referrerpolicy: 'no-referrer',
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+    },
+  };
   const controller = new AbortController();
   const promise = fetch(url, { signal: controller.signal, ...options });
   if (signal) signal.addEventListener("abort", () => controller.abort());
