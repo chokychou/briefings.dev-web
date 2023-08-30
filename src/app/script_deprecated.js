@@ -17,8 +17,6 @@ const fetchTimeout = (url, ms, {signal, ...options} = {}) => {
     referrerpolicy: 'no-referrer',
     headers: {
       "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
     },
   };
   const controller = new AbortController();
