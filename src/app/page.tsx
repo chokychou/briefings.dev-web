@@ -4,6 +4,8 @@ import '../pushpush.js'
 export default function Home() {
   return (
     <div>
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icon-512x512.png"></link>
       <div className="container">
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-S2DHEHCCVL"></Script>
         <Script id="google-analytics">
