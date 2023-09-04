@@ -36,6 +36,7 @@ export default function Header() {
     // Ask notification by default.
     Notification.requestPermission().then((permission) => {
       if (permission === 'granted') {
+        console.log('Permission granted.');
         // Get registration token. Initially this makes a network call, once retrieved
         // subsequent calls to getToken will return from cache.
         const messaging = getMessaging();
