@@ -24,6 +24,7 @@ messaging.onBackgroundMessage(function(payload) {
   const notificationTitle = payload.notification.title;
   const notificationOptions = {
     body: payload.notification.body,
+    tag: "notification-1",
   };
 
   self.registration.showNotification(notificationTitle, notificationOptions);
