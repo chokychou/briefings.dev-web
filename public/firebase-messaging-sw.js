@@ -15,17 +15,5 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-// Retrieve firebase messaging
+// Initialize firebase messaging. Notifications are managed by the backend.
 const messaging = firebase.messaging();
-
-messaging.onBackgroundMessage(function(payload) {
-  console.log("Received background message ", payload);
-
-  const notificationTitle = payload.notification.title;
-  const notificationOptions = {
-    body: payload.notification.body,
-    tag: "notification-1",
-  };
-
-  self.registration.showNotification(notificationTitle, notificationOptions);
-});
