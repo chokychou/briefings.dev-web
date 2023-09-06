@@ -7,7 +7,8 @@ import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 import { getMessaging, getToken } from "firebase/messaging";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set, get } from "firebase/database";
+import React from 'react';
 
 export default function Header() {
 
@@ -24,10 +25,34 @@ export default function Header() {
     databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
   };
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
+  // Tracks subscription status.
+  const [isSubscribed, setIsSubscribed] = React.useState(false);
 
-  async function RequestNotification() {
+  // Initialize Firebase, then get a token.
+  const app = initializeApp(firebaseConfig);
+  let tokenRef = React.useRef("");
+  React.useEffect(() => {
+    getToken(getMessaging(), {
+      vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY
+    }).then((currentToken) => {
+      if (!currentToken || currentToken === '') { return; }
+      tokenRef.current = currentToken;
+      // check if it's in server.
+      const db = getDatabase();
+      get(ref(db, 'tokens/' + currentToken)).then((tokens) => {
+        if (tokens.exists()) {
+          setIsSubscribed(true);
+        } else {
+          setIsSubscribed(false);
+        }
+      });
+    }).catch((err) => {
+      console.log('An error occurred while retrieving token. ', err);
+    });
+  }, []);
+  const currentToken = tokenRef.current;
+
+  async function requestNotification() {
     // For all devices including ios.
     // Listen to button and add event listeners to request notification permissions.
     // Notification.requestPermission();
@@ -36,40 +61,47 @@ export default function Header() {
     // Ask notification by default.
     Notification.requestPermission().then((permission) => {
       if (permission === 'granted') {
-        console.log('Permission granted.');
-        // Get registration token. Initially this makes a network call, once retrieved
-        // subsequent calls to getToken will return from cache.
-        const messaging = getMessaging();
-
-        getToken(messaging, {
-          vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY
-        }).then((currentToken) => {
-          if (currentToken) {
-            // Log token and send to server.
-            // TODO: Set IP and ttl.
-            pushTokenToServer(currentToken, 3600);
-          } else {
-            // Show permission request UI
-            console.log('No registration token available. Request permission to generate one.');
-            // ...
-          }
-        }).catch((err) => {
-          console.log('An error occurred while retrieving token. ', err);
+        if (currentToken !== "") {
+          const db = getDatabase();
+          set(ref(db, 'tokens/' + currentToken), {
+            ttl: 3600,
+            date: new Date()
+          });
+          setIsSubscribed(true);
+          // Log token and send to server.
+          // TODO: Set IP and ttl.
+          console.log('Successfully retrieved token. Sending to server.');
+        } else {
+          // Show permission request UI
+          console.log('Failed to subscribe: no registration token available.');
           // ...
-        });
+        }
       } else {
-        console.log('Unable to get permission.');
+        console.log('Failed to subscribe: U=unable to get permission.');
       }
     });
   };
 
-  function pushTokenToServer(token: string, ttl: number) {
-    const db = getDatabase();
-    set(ref(db, 'tokens/' + token), {
-      ttl: ttl,
-      date: new Date()
-    });
-  }
+  async function removeTokenFromServer() {
+    if (currentToken !== "") {
+      setIsSubscribed(false);
+      const db = getDatabase();
+      set(ref(db, 'tokens/' + currentToken), null);
+      console.log('Successfully unsubscribed from server.');
+    } else {
+      console.log('Failed to unsubscribe: no registration token available.');
+    }
+  };
+
+  // Controls drop down menu logic.
+  const [isButtonClicked, setIsButtonClicked] = React.useState(false);
+  const handleButtonClick = () => {
+    if (isButtonClicked) {
+      setIsButtonClicked(false);
+    } else {
+      setIsButtonClicked(true);
+    }
+  };
 
   return (
     <div>
@@ -94,7 +126,24 @@ export default function Header() {
           <nav className="text-gray-600 text-sm">
             {/* <a href="https://briefings.dev" className="py-2 px-4 hover:opacity-0 transition-opacity duration-500 sm:inline-block hidden">Home</a>
             <a href="https://briefings.dev" className="py-2 px-4 hover:opacity-0 transition-opacity duration-500 sm:inline-block hidden" >About</a> */}
-            <button onClick={RequestNotification} id="push" className="py-2 px-4">Push</button>
+
+            <div className="relative inline-block text-left">
+              <div>
+                <button type="button" className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" id="menu-button" aria-expanded="false" aria-haspopup={isButtonClicked ? false : true} onClick={handleButtonClick}>
+                  Subscribe Status: {isSubscribed ? 'YES' : 'NO'}
+                  <svg className="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+                  </svg>
+                </button>
+              </div>
+
+              <div className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" style={{ display: isButtonClicked ? 'block' : 'none' }}>
+                <div className="py-1" role="none">
+                  <button type="submit" className="text-gray-700 block w-full px-4 py-2 text-left text-sm" role="menuitem" id="menu-subscribe" onClick={requestNotification}>Subscribe</button>
+                  <button type="submit" className="text-gray-700 block w-full px-4 py-2 text-left text-sm" role="menuitem" id="menu-unsubscribe" onClick={removeTokenFromServer}>Unsubscribe</button>
+                </div>
+              </div>
+            </div>
           </nav>
         </div>
       </header>
