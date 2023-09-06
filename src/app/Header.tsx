@@ -106,7 +106,7 @@ export default function Header() {
   return (
     <div>
       <link rel="manifest" href="/manifest.json" />
-      <link rel="apple-touch-icon" href="/icon-512x512.png"></link>
+      <link rel="apple-touch-icon" href="/apple-touch-icon.png"></link>
       <div className="container">
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-S2DHEHCCVL"></Script>
         <Script id="google-analytics">
