@@ -1,14 +1,15 @@
 import Script from 'next/script'
 
 export default function Main() {
-    return (
-        <main id="main" className="bg-gray-100 mx-auto mt-4 py-8">
-          <Script
-            id="query_server"
-            strategy="lazyOnload"
-          >
-            {
-              `
+  return (
+    <main id="main" className="bg-gray-100 py-8 m-0">
+
+      <Script
+        id="query_server"
+        strategy="lazyOnload"
+      >
+        {
+          `
             const serving_path = "/backend";
 
             // value enum in each row of serving.json
@@ -65,13 +66,13 @@ export default function Main() {
               headerA.href = values[serving_columns.url];
               headerA.textContent= values[serving_columns.title];
               const headerDiv = document.createElement("h2");
-              headerDiv.className = "text-gray-800 text-xl font-bold mb-2";
+              headerDiv.className = "ont-bold tracking-tight text-slate-800 text-xl mb-2 font-bold";
               headerDiv.appendChild(headerA);
 
               // Create a body div
               const bodyDiv = document.createElement("div");
               bodyDiv.textContent = values[serving_columns.summary];
-              bodyDiv.className = "text-gray-600 leading-relaxed";
+              bodyDiv.className = "text-slate-600";
 
               // Add the innermost div to the inner div
               containerDiv.appendChild(headerDiv);
@@ -84,8 +85,8 @@ export default function Main() {
 
             display_serving();
             `
-            }
-          </Script>
-        </main>
-    )
+        }
+      </Script>
+    </main>
+  )
 }
