@@ -79,6 +79,7 @@ export default function SubscribeButton() {
         console.log('Failed to subscribe: U=unable to get permission.');
       }
     });
+    handleButtonClick();
   };
 
   async function removeTokenFromServer() {
@@ -90,16 +91,13 @@ export default function SubscribeButton() {
     } else {
       console.log('Failed to unsubscribe: no registration token available.');
     }
+    handleButtonClick();
   };
 
   // Controls drop down menu logic.
   const [isButtonClicked, setIsButtonClicked] = React.useState(false);
   const handleButtonClick = () => {
-    if (isButtonClicked) {
-      setIsButtonClicked(false);
-    } else {
-      setIsButtonClicked(true);
-    }
+    setIsButtonClicked(!isButtonClicked);
   };
 
   return (
@@ -114,7 +112,7 @@ export default function SubscribeButton() {
         </div>
       </div>
 
-      <div className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" style={{ display: isButtonClicked ? 'block' : 'none' }}>
+      <div className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" style={{ display: isButtonClicked ? 'block' : 'none' }}>
         <div className="py-1" role="none">
           <button type="submit" className="text-gray-700 block w-full px-4 py-2 text-left text-sm" role="menuitem" id="menu-subscribe" onClick={requestNotification}>Subscribe</button>
           <button type="submit" className="text-gray-700 block w-full px-4 py-2 text-left text-sm" role="menuitem" id="menu-unsubscribe" onClick={removeTokenFromServer}>Unsubscribe</button>

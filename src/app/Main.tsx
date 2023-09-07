@@ -4,15 +4,13 @@ import React from "react";
 
 export default function Main() {
   const navigation_translation = 'translate-x-0';
-  const main_padding_updon_navigation_translation = 'pl-80';
 
   function mainReset() {
     document.getElementById("nav-div")?.classList.remove(navigation_translation);
-    document.getElementById("main")?.classList.remove(main_padding_updon_navigation_translation);
   }
+  
   return (
-    <main id="main" className="bg-gray-100 p-10" onClick={mainReset}>
-
+    <main id="main" className="bg-gray-100 p-10 overflow-hidden" onClick={ mainReset }>
       <Script
         id="query_server"
         strategy="lazyOnload"

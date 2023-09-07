@@ -4,16 +4,13 @@ import React from "react";
 export default function Nav() {
     const [isButtonDisabled, setIsButtonDisabled] = React.useState(false);
     const navigation_translation = 'translate-x-0';
-    const main_padding_updon_navigation_translation = 'pl-80';
 
     function navigation_transition() {
         setIsButtonDisabled(!isButtonDisabled);
         if (!isButtonDisabled) {
             document.getElementById("nav-div")?.classList.add(navigation_translation);
-            document.getElementById("main")?.classList.add(main_padding_updon_navigation_translation);
         } else {
             document.getElementById("nav-div")?.classList.remove(navigation_translation);
-            document.getElementById("main")?.classList.remove(main_padding_updon_navigation_translation);
         }
     }
 
