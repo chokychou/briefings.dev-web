@@ -10,7 +10,7 @@ export default function Main() {
   }
   
   return (
-    <main id="main" className="bg-gray-100 p-10 overflow-hidden" onClick={ mainReset }>
+    <main id="main" className="bg-gray-100 p-10 overflow-hidden lg:pl-80" onClick={ mainReset }>
       <Script
         id="query_server"
         strategy="lazyOnload"
