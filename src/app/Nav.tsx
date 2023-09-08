@@ -29,13 +29,11 @@ export default function Nav() {
                     <ul role="list" className="-ml-0.5 h-[calc(100vh-4.5rem)] overflow-y-auto py-7 pl-0.5 pr-8 space-y-8 xl:pr-16">
                         <li>
                             <h3 className="font-semibold tracking-tight text-slate-900">
-                                WIP
+                                Work in grogress
                             </h3>
                             <ul role="list" className="pl-3 mt-3 space-y-2">
                                 <li>
-                                    <a href="" className="text-slate-900 hover:text-slate-800">
-                                        wip
-                                    </a>
+                                    <p className="text-slate-900 hover:text-slate-800">wip</p>
                                 </li>
                             </ul>
                         </li>
