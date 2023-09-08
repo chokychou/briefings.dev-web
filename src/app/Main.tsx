@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Main() {
   return (
-    <main id="main" className="bg-gray-100 overflow-hidden lg:pl-80">
+    <main id="main" className="bg-gray-100 overflow-hidden lg:pl-20 lg:pr-20">
       <Script
         id="query_server"
         strategy="lazyOnload"
