@@ -26,7 +26,7 @@ export default function Header() {
                     gtag('config', 'G-S2DHEHCCVL');
                 `}
             </Script>
-            <div className="flex items-center basis-0 text-sm font-semibold bg-slate-900 text-slate-50 z-50" style={ isNotificationEnabled ? { display: 'none' } : { display: 'block' }}>
+            <div className="inline-block items-center basis-0 text-sm font-semibold bg-slate-900 text-slate-50 z-50" style={ isNotificationEnabled ? { display: 'none' } : { display: 'block' }}>
                 Please give notification permission to use subscriptions services.
             </div>
             {/* Header section */}

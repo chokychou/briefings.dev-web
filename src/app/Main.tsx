@@ -1,16 +1,9 @@
-'use client';
 import Script from 'next/script'
 import React from "react";
 
 export default function Main() {
-  const navigation_translation = 'translate-x-0';
-
-  function mainReset() {
-    document.getElementById("nav-div")?.classList.remove(navigation_translation);
-  }
-  
   return (
-    <main id="main" className="bg-gray-100 p-10 overflow-hidden lg:pl-80" onClick={ mainReset }>
+    <main id="main" className="bg-gray-100 overflow-hidden lg:pl-80">
       <Script
         id="query_server"
         strategy="lazyOnload"
