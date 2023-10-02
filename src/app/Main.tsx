@@ -63,15 +63,15 @@ export default function Main() {
 
               // Create a header div
               const headerA = document.createElement("a");
-              headerA.href = values[serving_columns.url];
-              headerA.textContent= values[serving_columns.title];
+              headerA.href = values.url;
+              headerA.textContent= values.title;
               const headerDiv = document.createElement("h2");
               headerDiv.className = "ont-bold tracking-tight text-slate-800 text-xl mb-2 font-bold";
               headerDiv.appendChild(headerA);
 
               // Create a body div
               const bodyDiv = document.createElement("div");
-              bodyDiv.textContent = values[serving_columns.summary];
+              bodyDiv.textContent = values.summary;
               bodyDiv.className = "text-slate-600";
 
               // Add the innermost div to the inner div
